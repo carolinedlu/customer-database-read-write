@@ -10,10 +10,9 @@ st.title("Customer Loyalty Program")
 st.header("Look up an existing customer")
 first_name = st.text_input("Customer's first name", placeholder="Frank")
 last_name = st.text_input("Customer's last name", placeholder="Slootman")
+search_for_cust = st.button("Search for customer")
 
 st.header("Add a new customer")
-
-search_for_cust = st.button("Search for customer")
 
 if search_for_cust:
     conn = snowflake.connector.connect(
@@ -26,6 +25,7 @@ if search_for_cust:
 )
     
     cur = conn.cursor()
-    cur.execute('select * from CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS')
-    to_print = cur.fetchmany(3)
-    st.write(to_print)
+    result = cur.execute('select * from CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS')
+    st.write(result)
+#     to_print = cur.fetchmany(3)
+#     st.write(to_print)
