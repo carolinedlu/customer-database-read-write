@@ -43,7 +43,7 @@ if add_new_cust:
     )
     
     cur = conn.cursor()
-    cur.execute('INSERT INTO CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS VALUES ('Caroline', 'Frasca');')
+    cur.execute('insert into CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS (firstname, lastname) values ('Caroline', 'Frasca');')
     st.write(cur.fetchall())
     
     if cursor.rowcount==0:
