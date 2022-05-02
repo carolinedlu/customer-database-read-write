@@ -7,12 +7,10 @@ USER = st.secrets["USER"]
 ACCOUNT = st.secrets["ACCOUNT"]
 
 st.title("Customer Loyalty Program")
-st.header("Look up an existing customer")
 first_name = st.text_input("Customer's first name", placeholder="Frank")
 last_name = st.text_input("Customer's last name", placeholder="Slootman")
-search_for_cust = st.button("Search for customer")
-
-st.header("Add a new customer")
+search_for_cust = st.button("Search for existing customer")
+add_new_cust = st.button("Add new customer")
 
 if search_for_cust:
     conn = snowflake.connector.connect(
@@ -22,11 +20,36 @@ if search_for_cust:
     session_parameters={
 #         'QUERY_TAG': 'EndOfMonthFinancials',
     }
-)
+    )
     
     cur = conn.cursor()
     cur.execute('select * from CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS')
     st.write(cur.fetchall())
+    
+    if cursor.rowcount==0:
+        st.error('No such customer exists in the database')
 
 #     to_print = cur.fetchmany(3)
 #     st.write(to_print)
+
+if add_new_cust:
+    conn = snowflake.connector.connect(
+    user=USER,
+    password=PASSWORD,
+    account=ACCOUNT,
+    session_parameters={
+#         'QUERY_TAG': 'EndOfMonthFinancials',
+    }
+    )
+    
+    cur = conn.cursor()
+    cur.execute('insert into CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS (firstname, lastname)
+    values (Caroline, Frasca);')
+    st.write(cur.fetchall())
+    
+    if cursor.rowcount==0:
+        st.error('No such customer exists in the database')
+
+#     to_print = cur.fetchmany(3)
+#     st.write(to_print)
+    
