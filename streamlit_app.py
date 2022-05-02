@@ -8,6 +8,9 @@ ACCOUNT = st.secrets["ACCOUNT"]
 
 st.title("Customer Loyalty Program")
 st.header("Look up an existing customer")
+first_name = st.text_input("Customer's first name", placeholder="Frank")
+last_name = st.text_input("Customer's first name", placeholder="Slootman")
+
 st.header("Add a new customer")
 
 con = snowflake.connector.connect(
