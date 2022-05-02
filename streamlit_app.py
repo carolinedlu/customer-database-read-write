@@ -4,7 +4,7 @@ import snowflake.connector
 PASSWORD = st.secrets["PASSWORD"]
 WAREHOUSE = st.secrets["WAREHOUSE"]
 USER = st.secrets["USER"]
-ACCOUNT = st.secrets("ACCOUNT")
+ACCOUNT = st.secrets["ACCOUNT"]
 
 st.title("Customer Loyalty Program")
 st.header("Look up an existing customer")
