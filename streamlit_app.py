@@ -26,6 +26,6 @@ if search_for_cust:
 )
     
     cur = conn.cursor()
-    cur.execute('select * from customers')
+    cur.execute('select * from CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS')
     to_print = cur.fetchmany(3)
     st.write(to_print)
