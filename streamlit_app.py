@@ -13,7 +13,10 @@ last_name = st.text_input("Customer's last name", placeholder="Slootman")
 
 st.header("Add a new customer")
 
-conn = snowflake.connector.connect(
+search_for_cust = st.button("Search for customer")
+
+if search_for_cust:
+    conn = snowflake.connector.connect(
     user=USER,
     password=PASSWORD,
     account=ACCOUNT,
@@ -21,10 +24,7 @@ conn = snowflake.connector.connect(
 #         'QUERY_TAG': 'EndOfMonthFinancials',
     }
 )
-
-search_for_cust = st.button("Search for customer")
-
-if search_for_cust:
+    
     cur = conn.cursor()
     cur.execute('select * from customers')
     to_print = cur.fetchmany(3)
