@@ -28,4 +28,4 @@ def search_db_for_cust(first_name, last_name):
     to_print = cur.fetchmany(3)
     st.write(to_print)
 
-search_for_cust = st.button("Search for customer", on_click=search_, args=(first_name, last_name)))
+search_for_cust = st.button("Search for customer", on_click=search_, args=(first_name, last_name))
