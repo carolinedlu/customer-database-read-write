@@ -26,7 +26,7 @@ if search_for_cust:
     cur.execute('select * from CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS')
     st.write(cur.fetchall())
     
-    if cursor.rowcount==0:
+    if cur.rowcount==0:
         st.error('No such customer exists in the database')
 
 #     to_print = cur.fetchmany(3)
@@ -46,7 +46,7 @@ if add_new_cust:
     cur.execute('insert into CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS (firstname, lastname) values ('Caroline', 'Frasca');')
     st.write(cur.fetchall())
     
-    if cursor.rowcount==0:
+    if cur.rowcount==0:
         st.error('No such customer exists in the database')
 
 #     to_print = cur.fetchmany(3)
