@@ -31,12 +31,13 @@ if search_for_cust:
     if cur.rowcount==0:
         st.info('No such customer exists in the databas.')
     else: 
-        st.info("One or more customer(s) exist in the database with the same first and last names. Here they are: ")
-        st.write(rows)
+        search_results = ""
         #st.info(search_results)
-        for row in rows:
-            for col in row:
-                st.write(col)
+        for first, last in cursor.fetchall():
+            search_results += f"{first} {last}\n"
+        cust_exists_message = "One or more customer(s) exist in the database with the same first and last names. Here they are:"
+        full_results = cust_exists_message + search_results
+        st.info(full_results)
 
 if add_new_cust:
     conn = snowflake.connector.connect(
