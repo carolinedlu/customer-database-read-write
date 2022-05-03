@@ -33,7 +33,7 @@ if search_for_cust:
     else: 
         search_results = ""
         #st.info(search_results)
-        for first, last in cursor.fetchall():
+        for first, last in cur.fetchall():
             search_results += f"{first} {last}\n"
         cust_exists_message = "One or more customer(s) exist in the database with the same first and last names. Here they are:"
         full_results = cust_exists_message + search_results
