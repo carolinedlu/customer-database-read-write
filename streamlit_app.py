@@ -31,7 +31,7 @@ if search_for_cust:
     elif num_results == 1:      
         for first, last in results:
             search_results += f"{first} {last}."
-        full_results = "✅ One customer exists in the database with the same first and last names.\n Here is the customer: " + search_results
+        full_results = "✅ One customer exists in the database with the same first and last name.\n Here is the customer: " + search_results
         st.success(full_results)
     else:
         search_results = ""
