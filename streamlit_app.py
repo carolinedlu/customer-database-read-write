@@ -27,7 +27,6 @@ if search_for_cust:
     results = cur.fetchall()
     num_results = cur.rowcount
     ind = 0
-    #search_results = cur.fetchall
 
     if num_results == 0:
         st.info('No such customer exists in the databas.')
@@ -43,8 +42,6 @@ if search_for_cust:
         cust_exists_message = "One or more customer(s) exist in the database with the same first and last names. Here they are: "
         full_results = cust_exists_message + search_results
         st.write(full_results)
-#         st.write(search_results)
-#         st.info(full_results)
 
 if add_new_cust:
     conn = snowflake.connector.connect(
@@ -58,12 +55,6 @@ if add_new_cust:
     
     cur = conn.cursor()
     cur.execute("INSERT INTO CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS VALUES (%s, %s)", (first_name, last_name))
-    try:
-      query_id = cur.sfqid
-      while conn.is_still_running(conn.get_query_status_throw_if_error(query_id)):
-        time.sleep(1)
-    except ProgrammingError as err:
-      st.write('Programming Error: {0}'.format(err))
     
-    if cur.rowcount==0:
-        st.info('No such customer exists in the database')
+    if cur.rowcount > 0:
+        st.success("Customer was successfully added to the database.")
