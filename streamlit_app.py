@@ -16,10 +16,10 @@ if search_for_cust:
     conn = snowflake.connector.connect(
     user=USER,
     password=PASSWORD,
-    account=ACCOUNT,
-    session_parameters={
-#         'QUERY_TAG': 'EndOfMonthFinancials',
-    }
+    account=ACCOUNT
+#     session_parameters={
+# #         'QUERY_TAG': 'EndOfMonthFinancials',
+#     }
     )
     
     cur = conn.cursor()
@@ -29,7 +29,7 @@ if search_for_cust:
     ind = 0
 
     if num_results == 0:
-        st.info('No such customer exists in the databas.')
+        st.info('0️⃣ No such customer exists in the databas.')
     else: 
         search_results = ""
         for first, last in results:
@@ -39,7 +39,7 @@ if search_for_cust:
             else:
                 search_results += f"{first} {last}, "
 
-        cust_exists_message = "One or more customer(s) exist in the database with the same first and last names. Here they are: "
+        cust_exists_message = "✅ One or more customer(s) exist in the database with the same first and last names. Here they are: "
         full_results = cust_exists_message + search_results
         st.write(full_results)
 
@@ -57,6 +57,6 @@ if add_new_cust:
     cur.execute("INSERT INTO CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS VALUES (%s, %s)", (first_name, last_name))
     
     if cur.rowcount > 0:
-        st.success("Customer was successfully added to the database.")
+        st.success("🥳 Customer was successfully added to the database.")
     else:
-        st.error("Whoops! We couldn't add your customer. Try again or check the logs.")
+        st.error("😬 Whoops! We couldn't add your customer. Try again or check the logs.")
