@@ -37,7 +37,7 @@ if search_for_cust:
                 search_results += f"{first} {last}, "
         full_results = "✅ One customer exists in the database with the same first and last names.\n Here is the customer: "
         st.success(full_results)
-   else:
+    else:
         search_results = ""
         for first, last in results:
             ind += 1
