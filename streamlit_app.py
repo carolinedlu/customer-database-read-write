@@ -26,13 +26,13 @@ if search_for_cust:
     cur.execute("SELECT * FROM CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS WHERE FIRSTNAME=(%s) AND LASTNAME=(%s)", (first_name, last_name))
     results = cur.fetchall()
     num_results = cur.rowcount
+    ind = 0
     #search_results = cur.fetchall
 
-    if num_results==0:
+    if num_results == 0:
         st.info('No such customer exists in the databas.')
     else: 
         search_results = ""
-        ind = 0
         for first, last in results:
             ind += 1
             if num_results - 1 == ind:
