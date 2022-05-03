@@ -35,10 +35,10 @@ if search_for_cust:
         search_results = ""
         for first, last in results:
             ind += 1
-            if num_results - 1 == ind:
+            if num_results == ind:
                 search_results += f"and {first} {last}."
             else:
-                search_results += f"{first} {last},"
+                search_results += f"{first} {last}, "
 
         cust_exists_message = "One or more customer(s) exist in the database with the same first and last names. Here they are: "
         full_results = cust_exists_message + search_results
