@@ -23,12 +23,13 @@ if search_for_cust:
     )
     
     cur = conn.cursor()
-    cur.execute('select * from CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS')
+    cur.execute("SELECT * FROM CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS WHERE FIRSTNAME=(%s) AND LASTNAME=(%s)", (first_name, last_name))
     st.write(cur.fetchall())
     
     if cur.rowcount==0:
         st.error('No such customer exists in the database')
-
+    else:
+        st.write("cust exists")
 #     to_print = cur.fetchmany(3)
 #     st.write(to_print)
 
