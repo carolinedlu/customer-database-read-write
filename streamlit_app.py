@@ -28,13 +28,8 @@ if search_for_cust:
     if num_results == 0:
         st.info('0️⃣ No such customer exists in the database.')
     elif num_results == 1:      
-        search_results = ""
         for first, last in results:
-            ind += 1
-            if num_results == ind:
-                search_results += f"and {first} {last}."
-            else:
-                search_results += f"{first} {last}, "
+            search_results += f"and {first} {last}."
         full_results = "✅ One customer exists in the database with the same first and last names.\n Here is the customer: " + search_results
         st.success(full_results)
     else:
