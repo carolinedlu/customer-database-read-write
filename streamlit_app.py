@@ -29,9 +29,9 @@ if search_for_cust:
 
     if cur.rowcount==0:
         st.info('No such customer exists in the databas.')
-    else:
-        
-        st.info("One or more customer(s) exist in the database with the same first and last names. Here they are: (%s)", search_results)
+    else: 
+        st.info("One or more customer(s) exist in the database with the same first and last names. Here they are: ")
+        st.info(search_results)
 
 if add_new_cust:
     conn = snowflake.connector.connect(
