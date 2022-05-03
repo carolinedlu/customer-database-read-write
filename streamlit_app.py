@@ -24,12 +24,13 @@ if search_for_cust:
     results = cur.fetchall()
     num_results = cur.rowcount
     ind = 0
+    search_results = ""
 
     if num_results == 0:
         st.info('0️⃣ No such customer exists in the database.')
     elif num_results == 1:      
         for first, last in results:
-            search_results += f"and {first} {last}."
+            search_results += f"{first} {last}."
         full_results = "✅ One customer exists in the database with the same first and last names.\n Here is the customer: " + search_results
         st.success(full_results)
     else:
