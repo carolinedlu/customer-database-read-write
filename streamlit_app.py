@@ -39,7 +39,7 @@ if search_for_cust:
             else:
                 search_results += f"{first} {last}, "
 
-        cust_exists_message = "✅ One or more customer(s) exist in the database with the same first and last names.\n Here they are: "
+        cust_exists_message = "✅ " + num_results + " or more customer(s) exist in the database with the same first and last names.\n Here they are: "
         full_results = cust_exists_message + search_results
         st.success(full_results)
 
