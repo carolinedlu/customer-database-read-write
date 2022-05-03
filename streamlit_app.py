@@ -25,15 +25,21 @@ if search_for_cust:
     cur = conn.cursor()
     cur.execute("SELECT * FROM CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS WHERE FIRSTNAME=(%s) AND LASTNAME=(%s)", (first_name, last_name))
     results = cur.fetchall()
-
+    num_results = cur.rowcount
     #search_results = cur.fetchall
 
-    if cur.rowcount==0:
+    if num_results==0:
         st.info('No such customer exists in the databas.')
     else: 
         search_results = ""
+        ind = 0
         for first, last in results:
-            search_results += f"{first} {last}, "
+            ind += 1
+            if num_results - 1 == ind:
+                search_results += f"and {first} {last}."
+            else:
+                search_results += f"{first} {last},"
+
         cust_exists_message = "One or more customer(s) exist in the database with the same first and last names. Here they are: "
         full_results = cust_exists_message + search_results
         st.write(full_results)
