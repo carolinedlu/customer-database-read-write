@@ -26,7 +26,7 @@ if search_for_cust:
     ind = 0
 
     if num_results == 0:
-        st.info('0️⃣ No such customer exists in the databas.')
+        st.info('0️⃣ No such customer exists in the database.')
     elif num_results == 1:      
         search_results = ""
         for first, last in results:
