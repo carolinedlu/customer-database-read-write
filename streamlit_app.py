@@ -42,7 +42,7 @@ if search_for_cust:
         cust_exists_message = "✅ One or more customer(s) exist in the database with the same first and last names.\nHere they are: "
         full_results = cust_exists_message + search_results
         st.write(full_results)
-        st.success(cust_exists_message)
+        st.success(full_results)
 
 if add_new_cust:
     conn = snowflake.connector.connect(
