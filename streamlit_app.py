@@ -33,8 +33,8 @@ if search_for_cust:
     else: 
         search_results = ""
         for first, last in results:
-            search_results += f"{first} {last}\n"
-        cust_exists_message = "One or more customer(s) exist in the database with the same first and last names. Here they are:"
+            search_results += f"{first} {last}, "
+        cust_exists_message = "One or more customer(s) exist in the database with the same first and last names. Here they are: "
         full_results = cust_exists_message + search_results
         st.write(full_results)
 #         st.write(search_results)
