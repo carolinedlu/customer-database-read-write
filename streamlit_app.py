@@ -7,8 +7,8 @@ USER = st.secrets["USER"]
 ACCOUNT = st.secrets["ACCOUNT"]
 
 st.title("Customer Loyalty Program")
-first_name = st.text_input("Customer's first name", placeholder="Frank")
-last_name = st.text_input("Customer's last name", placeholder="Slootman")
+first_name = st.text_input("Customer's first name", placeholder="John")
+last_name = st.text_input("Customer's last name", placeholder="Smith")
 search_for_cust = st.button("Search for existing customer")
 add_new_cust = st.button("Add new customer")
 
