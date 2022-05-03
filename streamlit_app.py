@@ -58,3 +58,5 @@ if add_new_cust:
     
     if cur.rowcount > 0:
         st.success("Customer was successfully added to the database.")
+    else:
+        st.error("Whoops! We couldn't add your customer. Try again or check the logs.")
