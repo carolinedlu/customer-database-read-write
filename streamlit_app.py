@@ -14,12 +14,9 @@ add_new_cust = st.button("Add new customer")
 
 if search_for_cust:
     conn = snowflake.connector.connect(
-    user=USER,
-    password=PASSWORD,
-    account=ACCOUNT
-#     session_parameters={
-# #         'QUERY_TAG': 'EndOfMonthFinancials',
-#     }
+        user=USER,
+        password=PASSWORD,
+        account=ACCOUNT
     )
     
     cur = conn.cursor()
@@ -30,7 +27,7 @@ if search_for_cust:
 
     if num_results == 0:
         st.info('0️⃣ No such customer exists in the databas.')
-    else: 
+    elif num_results == 1:      
         search_results = ""
         for first, last in results:
             ind += 1
@@ -38,19 +35,25 @@ if search_for_cust:
                 search_results += f"and {first} {last}."
             else:
                 search_results += f"{first} {last}, "
-
-        cust_exists_message = "✅ " + str(num_results) + " or more customer(s) exist in the database with the same first and last names.\n Here they are: "
+        full_results = "✅ One customer exists in the database with the same first and last names.\n Here is the customer: "
+        st.success(full_results)
+   else:
+        search_results = ""
+        for first, last in results:
+            ind += 1
+            if num_results == ind:
+                search_results += f"and {first} {last}."
+            else:
+                search_results += f"{first} {last}, "
+        cust_exists_message = "✅ " + str(num_results) + "customer exist in the database with the same first and last names.\n Here they are: "
         full_results = cust_exists_message + search_results
         st.success(full_results)
 
 if add_new_cust:
     conn = snowflake.connector.connect(
-    user=USER,
-    password=PASSWORD,
-    account=ACCOUNT,
-    session_parameters={
-#         'QUERY_TAG': 'EndOfMonthFinancials',
-    }
+        user=USER,
+        password=PASSWORD,
+        account=ACCOUNT,
     )
     
     cur = conn.cursor()
