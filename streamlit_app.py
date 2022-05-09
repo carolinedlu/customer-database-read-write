@@ -55,6 +55,8 @@ if add_new_cust:
     
     cur = conn.cursor()
     cur.execute("INSERT INTO CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS VALUES (%s, %s)", (first_name, last_name))
+    results = cur.fetchall()
+    st.write(results)
     
     if cur.rowcount > 0:
         st.success("🥳 Customer was successfully added to the database.")
