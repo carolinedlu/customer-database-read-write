@@ -22,6 +22,7 @@ if search_for_cust:
     cur = conn.cursor()
     cur.execute("SELECT * FROM CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS WHERE FIRSTNAME=(%s) AND LASTNAME=(%s)", (first_name, last_name))
     results = cur.fetchall()
+    st.write(results)
     num_results = cur.rowcount
     ind = 0
     search_results = ""
