@@ -11,6 +11,8 @@ first_name = st.text_input("Customer's first name", placeholder="John")
 last_name = st.text_input("Customer's last name", placeholder="Smith")
 search_for_cust = st.button("Search for existing customer")
 add_new_cust = st.button("Add new customer")
+close_snow_conn = st.button("Close Snowflake Connection")
+clear_cache_snow_cred = st.button("Clear Snowflake Credentials from Cache")
 
 def connectToSnowflake(c):
     if "snowconn" in st.session_state:
@@ -24,11 +26,12 @@ def connectToSnowflake(c):
     st.session_state["snowconn"] = con
     return con
 
-def disconnectFromSnowflake():
-    if "snowconn" in st.session_state:
-        conn = st.session_state["snowconn"]
-        conn.close()
-        del st.session_state["snowconn"]
+if close_snow_conn and "snowconn" in st.session_state:
+    conn = st.session_state["snowconn"]
+    conn.close()
+
+if clear_cache_snow_cred:
+    del st.session_state["snowconn"]
 
 if search_for_cust:
     conn = connectToSnowflake({
