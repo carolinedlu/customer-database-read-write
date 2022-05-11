@@ -12,13 +12,31 @@ last_name = st.text_input("Customer's last name", placeholder="Smith")
 search_for_cust = st.button("Search for existing customer")
 add_new_cust = st.button("Add new customer")
 
+def connectToSnowflake(c):
+    if "snowconn" in st.session_state:
+        return st.session_state.get("snowconn")
+
+    con = snowflake.connector.connect(
+            user=c["USER"],
+            password=c["PASSWORD"],
+            account=c["ACCOUNT"],
+        );
+    st.session_state["snowconn"] = con
+    return con
+
+def disconnectFromSnowflake():
+    if "snowconn" in st.session_state:
+        conn = st.session_state["snowconn"]
+        conn.close()
+        del st.session_state["snowconn"]
+
 if search_for_cust:
-    conn = snowflake.connector.connect(
-        user=USER,
-        password=PASSWORD,
-        account=ACCOUNT
-    )
-    
+    conn = connectToSnowflake({
+        "USER": USER, 
+        "PASSWORD": PASSWORD, 
+        "ACCOUNT": ACCOUNT
+    })
+
     cur = conn.cursor()
     cur.execute("SELECT * FROM CUSTOMER_LOYALTY_PROGRAM.PUBLIC.CUSTOMERS WHERE FIRSTNAME=(%s) AND LASTNAME=(%s)", (first_name, last_name))
     results = cur.fetchall()
